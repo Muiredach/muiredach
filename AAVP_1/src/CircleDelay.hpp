@@ -28,7 +28,7 @@ public:
     int w;
     
     //properties for the delay
-    array< float, 44100*2 > Buffer; //this sets the size of the delay buffer to 2 seconds (considering a SamleRate of 44100Hz
+    array< float, 44100*2 > Buffer; //this sets the size of the delay buffer to 1 second (considering a SamleRate of 44100Hz
     float Feedback;
     int BufferIndex, BufferLength;
     
@@ -43,8 +43,8 @@ public:
     // Methods
     void draw();
     float process(float input);
-    void calcNote();
-    double CircleOscs();
+    int calcNote();
+    double CircleOscs(int x, int y);
     
 };
 

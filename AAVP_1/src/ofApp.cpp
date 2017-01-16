@@ -59,20 +59,17 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
     
     for (int i = 0; i < bufferSize; i++){
         
-        //stick noise shit in here
-        myCurrentVolume=myEnvelope.adsr(1.,myEnvelope.trigger);
-        CurrentCount=myCounter.phasor(1, 1, 9);
         
-        if (CurrentCount==1) myEnvelope.trigger=1; //trigger the envelope
+        double sound;
         
-        else myEnvelope.trigger=0;//release the envelope to make it fade out only if it's been triggered
+        for (auto & CircleDelay : Circles)
+        {
+                sound += CircleDelay.process(CircleDelay.CircleOscs(12, 12)/Circles.size());
+        }
         
-        myOscOutput=noise.noise();//one osc object can produce whichever waveform you want.
-        
-        
-        
-        output[i*nChannels    ] = delay.process(myOscOutput*myCurrentVolume);
+        output[i*nChannels    ] = sound;
         output[i*nChannels + 1] = output[i*nChannels    ];
+
     }
     
 }
@@ -138,6 +135,7 @@ void ofApp::mousePressed(int x, int y, int button){
     int y_pos = y;
     
     Circles.push_back(CircleDelay(x_pos, y_pos, CircleRadius));
+    
     
 }
 
