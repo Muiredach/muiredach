@@ -37,6 +37,7 @@ public:
     ofxMaxiOsc CircleCounter;
     maxiEnv CircleEnvelope;
     double CircleOscOutput, CircleCurrentVolume;
+    bool trig = false;
 
     
     
@@ -44,7 +45,7 @@ public:
     void draw();
     float process(float input);
     int calcNote();
-    double CircleOscs(int x, int y);
+    double CircleOscs();
     
 };
 

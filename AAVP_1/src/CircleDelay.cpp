@@ -11,7 +11,7 @@
 CircleDelay::CircleDelay(int _x, int _y, int _w): x(_x), y(_y), w(_w){
     
     BufferIndex = 0;
-    Feedback = 0.8;    
+    Feedback = 0.5;
 }
 
 
@@ -70,29 +70,28 @@ int CircleDelay::calcNote(){
 //------------------------------------------------------------------------------------------------
 
 
-double CircleDelay::CircleOscs(int x, int y)
+double CircleDelay::CircleOscs()
 {
     
     //sets the enelope depending on positon and size of circle
     CircleEnvelope.setAttack(y);
-    CircleEnvelope.setDecay(1);  // Needs to be at least 1
+    CircleEnvelope.setDecay(10);  // Needs to be at least 1
     CircleEnvelope.setSustain(x);
-    CircleEnvelope.setRelease(w*10);
-    
-    
-    
+    CircleEnvelope.setRelease(w*30);
     
     //initialises the oscilators to a noise and a Phazor :P
     double pluck = CirclePluck.noise();
-    
-    int CurrentCount = CircleCounter.phasor(1, 1, 9);
     CircleCurrentVolume=CircleEnvelope.adsr(1.,CircleEnvelope.trigger);
     
-    //______________FOR_TESTING______________
     
     //triggers a pluck
-    if (CurrentCount==1) CircleEnvelope.trigger=1;
-    else CircleEnvelope.trigger=0;
+    if (trig == true){
+        CircleEnvelope.trigger=1;
+    }
+    if (trig == false){
+        CircleEnvelope.trigger=0;
+    }
+
     
     //______________FOR_TESTING______________
     
@@ -118,6 +117,7 @@ float CircleDelay::process(float input){
     
     return output;
 }
+
 
 
 

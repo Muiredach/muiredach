@@ -3,8 +3,6 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxMaxim.h"
-#include "Circle.h"
-#include "YoDelay.hpp"
 #include "CircleDelay.hpp"
 
 #include <vector>
@@ -58,9 +56,6 @@ class ofApp : public ofBaseApp{
         vector <CircleDelay> Circles;
     
         int w;
-    
-        //dealy shit
-        YoDelay delay;
     
 		
 };
